@@ -18,6 +18,7 @@ type Road struct {
 	To     uint
 	Length float64
 	Speed  float64
+	Weight float64
 }
 
 // Query holds a query's data
