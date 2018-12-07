@@ -25,7 +25,7 @@ func getDistance(firstPoint data.Point, secondPoint data.Point) float64 {
 func (c *CircleFinder) VerticesInCircle(center data.Point, radius float64) []*data.Intersection {
 	validVertices := make([]*data.Intersection, 0)
 	for i := 0; i < len(c.Vertices); i++ {
-		if getDistance(center, c.Vertices[i].Point) <= radius {
+		if (getDistance(center, c.Vertices[i].Point) - radius < 1e-9) {
 			validVertices = append(validVertices, c.Vertices[i])
 		}
 	}

@@ -3,19 +3,20 @@ package algorithm
 import (
 	"routely/data"
 	"testing"
-	"fmt"
 )
 
 func TestVerticesInCircle(t *testing.T) {
 	center := data.Point{
-		X: 0.16,
-		Y: 0.21,
+		X: 2.00,
+		Y: 2.00,
 	}
-	vertices := []*data.Intersection{{0, data.Point{0.25, 0.33}}, {1,data.Point{0.73, 0.47}}, {2,data.Point{1.00, 0.54}}, {3,data.Point{0.34, 0.60}}, {4, data.Point{0.81, 0.20}}, {5,data.Point{1.07, 0.28}}}
+	vertices := []*data.Intersection{{0, data.Point{1.00, 1.00}}, {1,data.Point{3.00, 1.00}}, {2,data.Point{1.00, 4.00}}, {3,data.Point{3.00, 4.00}}}
 	cf := NewCircleFinder(vertices)
-
-	result :=  cf.VerticesInCircle(center, 300)
-	for i := 0; i < len(result); i++ {
-		fmt.Println(result[i])
+	result :=  cf.VerticesInCircle(center, 1.414213562)
+	answer := []*data.Intersection{{0, data.Point{1.00, 1.00}}, {1,data.Point{3.00, 1.00}}}
+	for i := 0; i < len(answer); i++ {
+		if result[i].X != answer[i].X && result[i].Y != answer[i].Y  {
+			t.Errorf("points was incorrect, got: %f, want: %f.", result[i], answer[i])
+		}
 	}
 }
