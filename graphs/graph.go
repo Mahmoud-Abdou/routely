@@ -34,7 +34,7 @@ func NewGraph(vertices []*data.Intersection, edges []*data.Road)*Graph {
 	}
 
 	for i := range edges{
-		G.ShortestPaths = append(G.ShortestPaths, Dijkstra(*G,i))
+		G.ShortestPaths = append(G.ShortestPaths, Dijkstra(*G,uint(i)))
 	}
 	return G
 }
