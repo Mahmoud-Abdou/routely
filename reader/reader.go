@@ -1,7 +1,7 @@
 package reader
 
 import (
-	"alqo/data"
+	"routely/data"
 	"bufio"
 	"io"
 )
