@@ -2,6 +2,7 @@ package graphs
 
 import "routely/data"
 
+
 // Graph reperesents a graph type in memory
 type Graph struct {
 	AdjList [][]data.Road
@@ -22,7 +23,11 @@ func NewGraph(vertices []*data.Intersection, edges []*data.Road)*Graph {
 	}
 
 	for _ , E := range edges{
-		E.Weight = E.Length / E.Speed
+		if E.Speed==0{
+			E.Weight = inf
+		}else{
+			E.Weight = E.Length / E.Speed
+		}
 		G.AdjList[E.From] = append(G.AdjList[E.From], *E)
 		E.From,E.To = E.To,E.From
 		G.AdjList[E.From] = append(G.AdjList[E.From], *E)
