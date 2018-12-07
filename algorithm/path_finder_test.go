@@ -58,7 +58,7 @@ func TestBestPath(t *testing.T) {
 	if result.WalkingDistance != 1 {
 		t.Errorf("Walking distance, expected 1, found %f", result.WalkingDistance)
 	}
-	if result.Length != 5 {
-		t.Errorf("Total distance, expected 5, found %f", result.Length)
+	if result.Length != 4.2 {
+		t.Errorf("Total distance, expected 4.2, found %f", result.Length)
 	}
 }
