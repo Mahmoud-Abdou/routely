@@ -106,7 +106,7 @@ func readQueries(scanner *bufio.Scanner) []*data.Query {
 			panic(err)
 		}
 			scanner.Scan()
-		ret[i].To.X, err = strconv.ParseFloat(scanner.Text(), 64)
+		ret[i].To.Y, err = strconv.ParseFloat(scanner.Text(), 64)
 		if err != nil {
 			panic(err)
 		}

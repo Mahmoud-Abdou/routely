@@ -1,7 +1,6 @@
 package reader
 
 import(
-	"fmt"
 	"strings"
   "testing"
 )
@@ -19,16 +18,50 @@ func TestSum(t *testing.T) {
   if len(queries) != 1 {
     t.Errorf("error size of queries")
   }
-  fmt.Println(len(intr))
+  var xs = []float64{0.25, 0.73, 1.00, 0.34, 0.81, 1.07}
+  var ys = []float64{0.33, 0.47, 0.54, 0.60, 0.20, 0.28}
   for i := 0; i < len(intr); i++ {
-    fmt.Println(intr[i])
+    if intr[i].ID != uint(i) {
+      t.Errorf("error wrong ID")
+    }
+    if intr[i].X != xs[i] {
+      t.Errorf("error wrong X")
+    }
+    if intr[i].Y != ys[i] {
+      t.Errorf("error wrong Y")
+    }
   }
-  fmt.Println(len(rood))
+  var from = []uint{0, 0, 3, 1, 1, 4, 2}
+  var to = []uint{1, 3, 4, 4, 2, 5, 5}
+  var leng = []float64{0.50, 0.28, 0.62, 0.28, 0.28, 0.27, 0.27}
+  var speed = []float64{20, 80, 80, 40, 40, 60, 60}
   for i := 0; i < len(rood); i++ {
-    fmt.Println(rood[i])
+    if rood[i].From != from[i] {
+      t.Errorf("error wrong from")
+    }
+    if rood[i].To != to[i] {
+      t.Errorf("error wrong from")
+    }
+    if rood[i].Length != leng[i] {
+      t.Errorf("error wrong length")
+    }
+    if rood[i].Speed != speed[i] {
+      t.Errorf("error wrong speed")
+    }
   }
-  fmt.Println(len(queries))
-  for i := 0; i < len(queries); i++ {
-    fmt.Println(queries[i])
+  if queries[0].From.X != 0.16 {
+    t.Errorf("error wrong q f x")
+  }
+  if queries[0].From.Y != 0.21 {
+    t.Errorf("error wrong q f y")
+  }
+  if queries[0].To.X != 1.09 {
+    t.Errorf("error wrong q t x exp 1.09 found %v", queries[0].To.X)
+  }
+  if queries[0].To.Y != 0.44 {
+    t.Errorf("error wrong q t y")
+  }
+  if queries[0].WalkingRadius != 300 {
+    t.Errorf("error wrong q R")
   }
 }
