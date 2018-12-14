@@ -31,7 +31,7 @@ type Query struct {
 
 // Path holds path distance and points
 type Path struct {
-	Length          float64
+	Time            float64
 	WalkingDistance float64
 	DrivingDistance float64
 	Steps           []*Intersection
