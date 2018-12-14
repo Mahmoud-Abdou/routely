@@ -31,8 +31,11 @@ func NewGraph(vertices []*data.Intersection, edges []*data.Road) *Graph {
 		G.AdjList[E.From] = append(G.AdjList[E.From], *E)
 	}
 
-	for i := range edges {
-		G.ShortestPaths = append(G.ShortestPaths, Dijkstra(G.AdjList, uint(i)))
+	for i := range vertices {
+		cost := Dijkstra(G.AdjList, uint(i))
+		for j := range cost{
+				G.ShortestPaths[i] = append(G.ShortestPaths[i],cost[j])
+		}
 	}
 	return G
 }
