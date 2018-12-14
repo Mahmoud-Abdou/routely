@@ -22,7 +22,7 @@ func BestPath(g *graphs.Graph, query *data.Query, circleFinder *CircleFinder) *d
 			if time + (walkingDistanceSource + walkingDistanceDestination)/5.0 < BestTime {
 				BestTime = time + (walkingDistanceSource + walkingDistanceDestination)/5.0
 				WalkingDistance = walkingDistanceSource + walkingDistanceDestination
-				DrivingDistance = GetDrivingDistance(i,j)
+				DrivingDistance = g.GetDrivingDistance(from.ID, to.ID)
 			}
 		}
 	}
