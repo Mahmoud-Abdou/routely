@@ -4,9 +4,9 @@ import "routely/data"
 
 // Graph reperesents a graph type in memory
 type Graph struct {
-	AdjList       [][]data.Road
+	AdjList      [][]data.Road
 	ShortestTime [][]float64
-	Distances [][]float64
+	Distances    [][]float64
 }
 
 // NewGraph builds graph from vertices and edges
@@ -15,7 +15,7 @@ func NewGraph(vertices []*data.Intersection, edges []*data.Road) *Graph {
 	G := &Graph{}
 	G.AdjList = make([][]data.Road, sz)
 	G.ShortestTime = make([][]float64, sz)
-	G.Distances = make([][]float64,sz)
+	G.Distances = make([][]float64, sz)
 
 	for i := range G.AdjList {
 		G.AdjList[i] = make([]data.Road, 0)
@@ -35,11 +35,9 @@ func NewGraph(vertices []*data.Intersection, edges []*data.Road) *Graph {
 	}
 
 	for i := range vertices {
-		cost,dist := Dijkstra(G.AdjList, uint(i))
-		for j := range cost{
-				G.ShortestTime[i] = append(G.ShortestTime[i],cost[j])
-				G.Distances[i] = append(G.Distances[i],dist[j])
-		}
+		cost, dist := Dijkstra(G.AdjList, uint(i))
+		G.ShortestTime[i] = cost
+		G.Distances[i] = dist
 	}
 	return G
 }

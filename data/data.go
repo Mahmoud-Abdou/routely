@@ -19,6 +19,12 @@ type Road struct {
 	Length float64
 	Speed  float64
 	Weight float64
+}
+
+// DijkstraNode holds dijkstra data in heap
+type DijkstraNode struct {
+	To     uint
+	Weight float64
 	Index  int
 }
 

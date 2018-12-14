@@ -8,7 +8,21 @@ import (
 
 func TestBestPath(t *testing.T) {
 	graph := &graphs.Graph{
-		ShortestPaths: [][]float64{
+		ShortestTime: [][]float64{
+			[]float64{
+				1, 2, 3, 4,
+			},
+			[]float64{
+				2, 1, 4, 3,
+			},
+			[]float64{
+				4, 3, 2, 1,
+			},
+			[]float64{
+				3, 4, 1, 2,
+			},
+		},
+		Distances: [][]float64{
 			[]float64{
 				1, 2, 3, 4,
 			},
@@ -58,7 +72,7 @@ func TestBestPath(t *testing.T) {
 	if result.WalkingDistance != 1 {
 		t.Errorf("Walking distance, expected 1, found %f", result.WalkingDistance)
 	}
-	if result.Length != 4.2 {
-		t.Errorf("Total distance, expected 4.2, found %f", result.Length)
+	if result.Time != 252.0 {
+		t.Errorf("Total distance, expected 4.2, found %f", result.Time)
 	}
 }

@@ -21,11 +21,11 @@ func Dijkstra(adjList [][]data.Road, from uint) ([]float64, []float64) {
 	var pq data.PriorityQueue
 	heap.Init(&pq)
 
-	init := &data.Road{From: 0, To: from, Length: 0, Speed: 0, Index: 0, Weight: 0}
+	init := &data.DijkstraNode{To: from, Weight: 0}
 	heap.Push(&pq, init)
 
 	for pq.Len() > 0 {
-		cur := heap.Pop(&pq).(*data.Road)
+		cur := heap.Pop(&pq).(*data.DijkstraNode)
 
 		if time[cur.To] < cur.Weight {
 			continue
@@ -35,9 +35,10 @@ func Dijkstra(adjList [][]data.Road, from uint) ([]float64, []float64) {
 			if e.Weight+time[e.From] < time[e.To] {
 				time[e.To] = time[e.From] + e.Weight
 				distance[e.To] = distance[e.From] + e.Length
-				var next = e
-				e.Weight = time[e.To]
-				heap.Push(&pq, &next)
+				heap.Push(&pq, &data.DijkstraNode{
+					To:     e.To,
+					Weight: time[e.To],
+				})
 			}
 		}
 	}
