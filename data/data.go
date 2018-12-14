@@ -28,6 +28,12 @@ type DijkstraNode struct {
 	Index  int
 }
 
+// CircleVertex holds vertex data in respect of circle
+type CircleVertex struct {
+	*Intersection
+	Distance float64
+}
+
 // Query holds a query's data
 type Query struct {
 	From          Point
