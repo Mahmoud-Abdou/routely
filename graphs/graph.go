@@ -1,6 +1,7 @@
 package graphs
 
 import "routely/data"
+import "fmt"
 
 // Graph reperesents a graph type in memory
 type Graph struct {
@@ -31,13 +32,21 @@ func NewGraph(vertices []*data.Intersection, edges []*data.Road) *Graph {
 		G.AdjList[E.From] = append(G.AdjList[E.From], *E)
 	}
 
-	for i := range edges {
-		G.ShortestPaths = append(G.ShortestPaths, Dijkstra(G.AdjList, uint(i)))
+	for i := range vertices {
+		cost := Dijkstra(G.AdjList, uint(i))
+		for j := range cost{
+				G.ShortestPaths[i] = append(G.ShortestPaths[i],cost[j])
+		}
 	}
 	return G
 }
 
 // Distance Gets shortest path between 2 nodes
 func (g *Graph) Distance(from, to uint) float64 {
+	fmt.Println("from: ",from)
+	fmt.Println("len: ", to)
+	fmt.Println("shortest: ", len(g.ShortestPaths))
+	fmt.Println("shortest from: ", len(g.ShortestPaths[from]))
+	fmt.Println("--------------------------------------")
 	return g.ShortestPaths[from][to]
 }

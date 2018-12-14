@@ -5,6 +5,8 @@ import (
     "routely/graphs"
     "routely/reader"
     "routely/algorithm"
+    "fmt"
+    "bufio"
 )
 
 func check(e error) {
@@ -14,14 +16,23 @@ func check(e error) {
 }
 
 func main() {
-  mapfile, err := os.Open("./Samples/map1.txt")
+  //input
+  input := bufio.NewReader(os.Stdin)
+  mapPath, _ := input.ReadString('\n')
+  queryPath := mapPath
+  mapPath = mapPath[:len(mapPath)-1]
+  queryPath = queryPath[:len(queryPath)-1]
+
+  mapfile, err := os.Open("./Samples/map" + mapPath + ".txt")
   check(err)
-  queryfile, err := os.Open("./Samples/queries1.txt")
+  queryfile, err := os.Open("./Samples/queries" + queryPath + ".txt")
   check(err)
   intersections, roads, queries := reader.ReadData(mapfile, queryfile)
   graph := graphs.NewGraph(intersections, roads)
   circlefinder := algorithm.NewCircleFinder(intersections)
   for _, query := range queries {
-    path := algorithm.BestPath(graph, query, circlefinder)
+    answer := algorithm.BestPath(graph, query, circlefinder)
+    fmt.Println("DrivingDistance: ", answer.DrivingDistance, '\n', "WalkingDistance: ", answer.WalkingDistance, '\n',  "Length: ",  answer.Length,  "\n")
   }
+
 }
