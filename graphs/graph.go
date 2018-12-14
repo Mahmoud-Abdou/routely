@@ -5,7 +5,8 @@ import "routely/data"
 // Graph reperesents a graph type in memory
 type Graph struct {
 	AdjList       [][]data.Road
-	ShortestPaths [][]float64
+	ShortestTime [][]float64
+	Distances [][]float64
 }
 
 // NewGraph builds graph from vertices and edges
@@ -13,11 +14,13 @@ func NewGraph(vertices []*data.Intersection, edges []*data.Road) *Graph {
 	sz := len(vertices)
 	G := &Graph{}
 	G.AdjList = make([][]data.Road, sz)
-	G.ShortestPaths = make([][]float64, sz)
+	G.ShortestTime = make([][]float64, sz)
+	G.Distances = make([][]float64,sz)
 
 	for i := range G.AdjList {
 		G.AdjList[i] = make([]data.Road, 0)
-		G.ShortestPaths[i] = make([]float64, 0)
+		G.ShortestTime[i] = make([]float64, 0)
+		G.Distances[i] = make([]float64, 0)
 	}
 
 	for _, E := range edges {
@@ -32,15 +35,19 @@ func NewGraph(vertices []*data.Intersection, edges []*data.Road) *Graph {
 	}
 
 	for i := range vertices {
-		cost := Dijkstra(G.AdjList, uint(i))
+		cost,dist := Dijkstra(G.AdjList, uint(i))
 		for j := range cost{
-				G.ShortestPaths[i] = append(G.ShortestPaths[i],cost[j])
+				G.ShortestTime[i] = append(G.ShortestTime[i],cost[j])
+				G.Distances[i] = append(G.Distances[i],dist[j])
 		}
 	}
 	return G
 }
 
 // Distance Gets shortest path between 2 nodes
-func (g *Graph) Distance(from, to uint) float64 {
-	return g.ShortestPaths[from][to]
+func (g *Graph) GetTime(from, to uint) float64 {
+	return g.ShortestTime[from][to]
+}
+func (g *Graph) GetDrivingDistance(from, to uint) float64 {
+	return g.Distances[from][to]
 }

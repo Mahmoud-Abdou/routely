@@ -32,7 +32,13 @@ func main() {
   circlefinder := algorithm.NewCircleFinder(intersections)
   for _, query := range queries {
     answer := algorithm.BestPath(graph, query, circlefinder)
-    fmt.Println("DrivingDistance: ", answer.DrivingDistance, " ", "WalkingDistance: ", answer.WalkingDistance, " ",  "Length: ",  answer.Length,  "\n")
+    fmt.Println("----------------------( ͡° ͜ʖ͡°)--------------------------")
+    fmt.Println()
+    fmt.Println("Time =  ", answer.Time, " mins")
+    fmt.Println("Distance = ", answer.DrivingDistance + answer.WalkingDistance, "km")
+    fmt.Println("Walking Distance = ", answer.WalkingDistance, "km")
+    fmt.Println("Vehicle Distance = ", answer.DrivingDistance, "km")
+    fmt.Println("--------------------------------------------------------")
   }
 
 }

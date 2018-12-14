@@ -8,12 +8,15 @@ import (
 const inf = 10000000000000
 
 // Dijkstra runs dijkstra on an adjacency list from a certain node
-func Dijkstra(adjList [][]data.Road, from uint) []float64 {
-	cost := make([]float64, len(adjList))
-	for i := range cost {
-		cost[i] = inf
+func Dijkstra(adjList [][]data.Road, from uint) ([]float64, []float64) {
+	time := make([]float64, len(adjList))
+	for i := range time {
+		time[i] = inf
 	}
-	cost[from] = 0
+	time[from] = 0
+
+	distance := make([]float64, len(adjList))
+	distance[from] = 0
 
 	var pq data.PriorityQueue
 	heap.Init(&pq)
@@ -24,19 +27,20 @@ func Dijkstra(adjList [][]data.Road, from uint) []float64 {
 	for pq.Len() > 0 {
 		cur := heap.Pop(&pq).(*data.Road)
 
-		if cost[cur.To] < cur.Weight {
+		if time[cur.To] < cur.Weight {
 			continue
 		}
 
 		for _, e := range adjList[cur.To] {
-			if e.Weight+cost[e.From] < cost[e.To] {
-				cost[e.To] = cost[e.From] + e.Weight
+			if e.Weight+time[e.From] < time[e.To] {
+				time[e.To] = time[e.From] + e.Weight
+				distance[e.To] = distance[e.From] + e.Length
 				var next = e
-				e.Weight = cost[e.To]
+				e.Weight = time[e.To]
 				heap.Push(&pq, &next)
 			}
 		}
 	}
 
-	return cost
+	return time, distance
 }
