@@ -11,7 +11,7 @@ type CircleFinder struct {
 }
 
 // NewCircleFinder initializes preprocessing for CircleFinder
-//O(1)
+//O(n)
 func NewCircleFinder(vertices []*data.Intersection) *CircleFinder {
 	circlefinder := &CircleFinder{}
 	circlefinder.Vertices = vertices
