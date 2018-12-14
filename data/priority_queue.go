@@ -1,7 +1,7 @@
 package data
 
 // PriorityQueue of roads
-type PriorityQueue []*Road
+type PriorityQueue []*DijkstraNode
 
 // Len gets the length of the PriorityQueue
 func (pq PriorityQueue) Len() int { return len(pq) }
@@ -24,7 +24,7 @@ func (pq *PriorityQueue) Pop() interface{} {
 // Push pushes an element to the PriorityQueue
 func (pq *PriorityQueue) Push(x interface{}) {
 	n := len(*pq)
-	item := x.(*Road)
+	item := x.(*DijkstraNode)
 	item.Index = n
 	*pq = append(*pq, item)
 }
