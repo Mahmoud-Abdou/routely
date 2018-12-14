@@ -14,16 +14,17 @@ func BestPath(g *graphs.Graph, query *data.Query, circleFinder *CircleFinder) *d
 	var WalkingDistance = 1e9
 	var DrivingDistance = 1e9
 	var BestTime = 1e9
+	var walkingTime float64
+	var totalTime float64
 
 	for _, from := range fromVertices {
 		for _, to := range toVertices {
-			time := g.GetTime(from.ID, to.ID)
-			walkingDistanceSource := getDistance(query.From, from.Point)
-			walkingDistanceDestination := getDistance(query.To, to.Point)
-			if time+(walkingDistanceSource+walkingDistanceDestination)/5.0 < BestTime {
-				BestTime = time + (walkingDistanceSource+walkingDistanceDestination)/5.0
-				WalkingDistance = walkingDistanceSource + walkingDistanceDestination
-				DrivingDistance = g.GetDrivingDistance(from.ID, to.ID)
+			walkingTime = from.Distance + to.Distance
+			totalTime = g.ShortestTime[from.ID][to.ID] + (walkingTime)/5.0
+			if totalTime < BestTime {
+				BestTime = totalTime
+				WalkingDistance = walkingTime
+				DrivingDistance = g.Distances[from.ID][to.ID]
 			}
 		}
 	}

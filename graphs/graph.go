@@ -42,14 +42,3 @@ func NewGraph(vertices []*data.Intersection, edges []*data.Road) *Graph {
 	}
 	return G
 }
-
-// Distance Gets shortest path between 2 nodes
-//O(1)
-func (g *Graph) GetTime(from, to uint) float64 {
-	return g.ShortestTime[from][to]
-}
-
-//O(1)
-func (g *Graph) GetDrivingDistance(from, to uint) float64 {
-	return g.Distances[from][to]
-}
