@@ -8,6 +8,7 @@ import (
 const inf = 10000000000000
 
 // Dijkstra runs dijkstra on an adjacency list from a certain node
+//O(n*log(v))
 func Dijkstra(adjList [][]data.Road, from uint) ([]float64, []float64) {
 	time := make([]float64, len(adjList))
 	for i := range time {

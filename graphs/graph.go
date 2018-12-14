@@ -10,6 +10,7 @@ type Graph struct {
 }
 
 // NewGraph builds graph from vertices and edges
+//O(n*n*log(v))
 func NewGraph(vertices []*data.Intersection, edges []*data.Road) *Graph {
 	sz := len(vertices)
 	G := &Graph{}
@@ -43,9 +44,12 @@ func NewGraph(vertices []*data.Intersection, edges []*data.Road) *Graph {
 }
 
 // Distance Gets shortest path between 2 nodes
+//O(1)
 func (g *Graph) GetTime(from, to uint) float64 {
 	return g.ShortestTime[from][to]
 }
+
+//O(1)
 func (g *Graph) GetDrivingDistance(from, to uint) float64 {
 	return g.Distances[from][to]
 }
