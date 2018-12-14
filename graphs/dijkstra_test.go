@@ -89,7 +89,8 @@ func TestDijkstra(t *testing.T) {
 
 	var result [][]float64
 	for i := range expectedResult {
-		result = append(result, Dijkstra(adjList, uint(i)))
+		time, _ := Dijkstra(adjList, uint(i))
+		result = append(result, time)
 	}
 
 	for i := 0; i < 6; i++ {
