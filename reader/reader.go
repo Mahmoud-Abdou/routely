@@ -1,9 +1,9 @@
 package reader
 
 import (
-	"routely/data"
 	"bufio"
 	"io"
+	"routely/data"
 	"strconv"
 )
 
@@ -15,7 +15,6 @@ func ReadData(mapFile io.Reader, queryFile io.Reader) ([]*data.Intersection, []*
 	scannerq.Split(bufio.ScanWords)
 	return readIntersections(scannerd), readRoads(scannerd), readQueries(scannerq)
 }
-
 
 func readIntersections(scanner *bufio.Scanner) []*data.Intersection {
 	scanner.Scan()
@@ -32,12 +31,12 @@ func readIntersections(scanner *bufio.Scanner) []*data.Intersection {
 			panic(err)
 		}
 		ret[i].ID = uint(id)
-			scanner.Scan()
+		scanner.Scan()
 		ret[i].X, err = strconv.ParseFloat(scanner.Text(), 64)
 		if err != nil {
 			panic(err)
 		}
-			scanner.Scan()
+		scanner.Scan()
 		ret[i].Y, err = strconv.ParseFloat(scanner.Text(), 64)
 		if err != nil {
 			panic(err)
@@ -61,18 +60,18 @@ func readRoads(scanner *bufio.Scanner) []*data.Road {
 			panic(err)
 		}
 		ret[i].From = uint(from)
-			scanner.Scan()
+		scanner.Scan()
 		to, err := strconv.ParseUint(scanner.Text(), 10, 32)
 		if err != nil {
 			panic(err)
 		}
 		ret[i].To = uint(to)
-			scanner.Scan()
+		scanner.Scan()
 		ret[i].Length, err = strconv.ParseFloat(scanner.Text(), 64)
 		if err != nil {
 			panic(err)
 		}
-			scanner.Scan()
+		scanner.Scan()
 		ret[i].Speed, err = strconv.ParseFloat(scanner.Text(), 64)
 		if err != nil {
 			panic(err)
@@ -95,22 +94,22 @@ func readQueries(scanner *bufio.Scanner) []*data.Query {
 		if err != nil {
 			panic(err)
 		}
-			scanner.Scan()
+		scanner.Scan()
 		ret[i].From.Y, err = strconv.ParseFloat(scanner.Text(), 64)
 		if err != nil {
 			panic(err)
 		}
-			scanner.Scan()
+		scanner.Scan()
 		ret[i].To.X, err = strconv.ParseFloat(scanner.Text(), 64)
 		if err != nil {
 			panic(err)
 		}
-			scanner.Scan()
+		scanner.Scan()
 		ret[i].To.Y, err = strconv.ParseFloat(scanner.Text(), 64)
 		if err != nil {
 			panic(err)
 		}
-			scanner.Scan()
+		scanner.Scan()
 		ret[i].WalkingRadius, err = strconv.ParseFloat(scanner.Text(), 64)
 		if err != nil {
 			panic(err)

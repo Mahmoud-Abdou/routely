@@ -6,6 +6,7 @@ import (
 )
 
 // BestPath finds optimal route in query for graph
+//O(n*m*log(dx*dx + dy*dy))
 func BestPath(g *graphs.Graph, query *data.Query, circleFinder *CircleFinder) *data.Path {
 	fromVertices := circleFinder.VerticesInCircle(query.From, query.WalkingRadius)
 	toVertices := circleFinder.VerticesInCircle(query.To, query.WalkingRadius)

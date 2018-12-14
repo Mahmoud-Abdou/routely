@@ -1,8 +1,8 @@
 package algorithm
 
 import (
-	"routely/data"
 	"math"
+	"routely/data"
 )
 
 // CircleFinder object holds vertices in order to find which ones fit in a circle
@@ -11,6 +11,7 @@ type CircleFinder struct {
 }
 
 // NewCircleFinder initializes preprocessing for CircleFinder
+//O(n)
 func NewCircleFinder(vertices []*data.Intersection) *CircleFinder {
 	circlefinder := &CircleFinder{}
 	circlefinder.Vertices = vertices
@@ -18,6 +19,7 @@ func NewCircleFinder(vertices []*data.Intersection) *CircleFinder {
 	return circlefinder
 }
 
+//O(log(dx*dx + dy*dy))
 func getDistance(firstPoint data.Point, secondPoint data.Point) float64 {
 	xd := secondPoint.X - firstPoint.X
 	yd := secondPoint.Y - firstPoint.Y
@@ -25,6 +27,7 @@ func getDistance(firstPoint data.Point, secondPoint data.Point) float64 {
 }
 
 // VerticesInCircle returns all vertices of CircleFinder that fit inside the circle given
+//O(n*log(dx*dx + dy*dy))
 func (c *CircleFinder) VerticesInCircle(center data.Point, radius float64) []*data.CircleVertex {
 	validVertices := make([]*data.CircleVertex, 0)
 	for _, vertex := range c.Vertices {
