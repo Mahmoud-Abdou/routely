@@ -4,17 +4,17 @@ package data
 type PriorityQueue []*DijkstraNode
 
 // Len gets the length of the PriorityQueue
-//O(1)
+// O(1)
 func (pq PriorityQueue) Len() int { return len(pq) }
 
 // Less compares two items
-//O(1)
+// O(1)
 func (pq PriorityQueue) Less(i, j int) bool {
 	return pq[i].Weight < pq[j].Weight
 }
 
 // Pop pops an element from the PriorityQueue
-//O(log(n))
+// O(log(n))
 func (pq *PriorityQueue) Pop() interface{} {
 	old := *pq
 	n := len(old)
@@ -25,7 +25,7 @@ func (pq *PriorityQueue) Pop() interface{} {
 }
 
 // Push pushes an element to the PriorityQueue
-//O(log(n))
+// O(log(n))
 func (pq *PriorityQueue) Push(x interface{}) {
 	n := len(*pq)
 	item := x.(*DijkstraNode)
@@ -33,7 +33,7 @@ func (pq *PriorityQueue) Push(x interface{}) {
 	*pq = append(*pq, item)
 }
 
-//O(1)
+// O(1)
 func (pq PriorityQueue) Swap(i, j int) {
 	pq[i], pq[j] = pq[j], pq[i]
 	pq[i].Index = i

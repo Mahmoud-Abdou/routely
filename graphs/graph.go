@@ -10,7 +10,7 @@ type Graph struct {
 }
 
 // NewGraph builds graph from vertices and edges
-//O(n*n*log(v))
+// O(n*n*log(v))
 func NewGraph(vertices []*data.Intersection, edges []*data.Road) *Graph {
 	sz := len(vertices)
 	G := &Graph{}
