@@ -8,14 +8,14 @@ type Point struct {
 
 // Intersection holds a vertex's data
 type Intersection struct {
-	ID uint
+	ID int
 	Point
 }
 
 // Road holds road data
 type Road struct {
-	From   uint
-	To     uint
+	From   int
+	To     int
 	Length float64
 	Speed  float64
 	Weight float64
@@ -23,7 +23,7 @@ type Road struct {
 
 // DijkstraNode holds dijkstra data in heap
 type DijkstraNode struct {
-	To     uint
+	To     int
 	Weight float64
 	Index  int
 }

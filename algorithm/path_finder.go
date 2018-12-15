@@ -11,28 +11,11 @@ func BestPath(g *graphs.Graph, query *data.Query, circleFinder *CircleFinder) *d
 	fromVertices := circleFinder.VerticesInCircle(query.From, query.WalkingRadius)
 	toVertices := circleFinder.VerticesInCircle(query.To, query.WalkingRadius)
 
-	var WalkingDistance = 1e9
-	var DrivingDistance = 1e9
-	var BestTime = 1e9
-	var walkingTime float64
-	var totalTime float64
-
-	for _, from := range fromVertices {
-		for _, to := range toVertices {
-			walkingTime = from.Distance + to.Distance
-			totalTime = g.ShortestTime[from.ID][to.ID] + (walkingTime)/5.0
-
-			if totalTime < BestTime {
-				BestTime = totalTime
-				WalkingDistance = walkingTime
-				DrivingDistance = g.Distances[from.ID][to.ID]
-			}
-		}
-	}
+	bestTime, walkingDistance, drivingDistance := g.Dijkstra(fromVertices, toVertices)
 
 	return &data.Path{
-		DrivingDistance: DrivingDistance,
-		WalkingDistance: WalkingDistance,
-		Time:            BestTime * 60,
+		DrivingDistance: drivingDistance,
+		WalkingDistance: walkingDistance,
+		Time:            bestTime * 60,
 	}
 }

@@ -28,28 +28,23 @@ func main() {
 		panic(err)
 	}
 
-	//clock
-	preStart := time.Now()
-
 	intersections, roads, queries := reader.ReadData(mapfile, queryfile)
 	graph := graphs.NewGraph(intersections, roads)
 	circlefinder := algorithm.NewCircleFinder(intersections)
 
-	preElapsed := time.Now().Sub(preStart)
-	fmt.Println("\nPre-processing Time = ", preElapsed)
+	var totalTime time.Duration
 
 	for _, query := range queries {
 		start := time.Now()
 		answer := algorithm.BestPath(graph, query, circlefinder)
 		elapsed := time.Now().Sub(start)
+		totalTime += elapsed
 
-		fmt.Print("\n------------------( ͡° ͜ʖ ͡°)------------------\n\n")
-		fmt.Println("Time             = ", answer.Time, "mins")
-		fmt.Println("Distance         = ", answer.DrivingDistance+answer.WalkingDistance, "km")
-		fmt.Println("Walking Distance = ", answer.WalkingDistance, "km")
-		fmt.Println("Vehicle Distance = ", answer.DrivingDistance, "km")
-		fmt.Println("Time Elapsed     = ", elapsed)
+		fmt.Printf("%.2f mins\n", answer.Time)
+		fmt.Printf("%.2f km\n", answer.DrivingDistance+answer.WalkingDistance)
+		fmt.Printf("%.2f km\n", answer.WalkingDistance)
+		fmt.Printf("%.2f km\n", answer.DrivingDistance)
+		fmt.Printf("%d ms\n\n", elapsed.Round(time.Millisecond)/time.Millisecond)
 	}
-
-	fmt.Print("\n------------------( ͡° ͜ʖ ͡°)------------------\n\n")
+	fmt.Printf("%d ms\n", totalTime.Round(time.Millisecond)/time.Millisecond)
 }

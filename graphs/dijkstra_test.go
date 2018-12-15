@@ -87,9 +87,11 @@ func TestDijkstra(t *testing.T) {
 		},
 	}
 
+	g := &Graph(vertices, edges)
+
 	var result [][]float64
 	for i := range expectedResult {
-		time, _ := Dijkstra(adjList, uint(i))
+		time, _ := g.Dijkstra(adjList, i)
 		result = append(result, time)
 	}
 
