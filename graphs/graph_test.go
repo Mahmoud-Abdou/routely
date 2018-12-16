@@ -8,7 +8,7 @@ func TestNewGraph(t *testing.T) {
 	vert := []*data.Intersection{}
 	for i := 0; i < 5; i++ {
 		var inter data.Intersection
-		inter.ID = uint(i)
+		inter.ID = i
 		inter.X = 1
 		inter.Y = 2
 		vert = append(vert, &inter)

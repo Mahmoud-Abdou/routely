@@ -30,12 +30,12 @@ func readIntersections(scanner *bufio.Scanner) []*data.Intersection {
 		ret[i] = &data.Intersection{}
 
 		scanner.Scan()
-		id, err := strconv.ParseUint(scanner.Text(), 10, 32)
+		id, err := strconv.Atoi(scanner.Text())
 		if err != nil {
 			panic(err)
 		}
 
-		ret[i].ID = uint(id)
+		ret[i].ID = id
 
 		scanner.Scan()
 		ret[i].X, err = strconv.ParseFloat(scanner.Text(), 64)
@@ -64,19 +64,19 @@ func readRoads(scanner *bufio.Scanner) []*data.Road {
 		ret[i] = &data.Road{}
 
 		scanner.Scan()
-		from, err := strconv.ParseUint(scanner.Text(), 10, 32)
+		from, err := strconv.Atoi(scanner.Text())
 		if err != nil {
 			panic(err)
 		}
 
-		ret[i].From = uint(from)
+		ret[i].From = from
 		scanner.Scan()
-		to, err := strconv.ParseUint(scanner.Text(), 10, 32)
+		to, err := strconv.Atoi(scanner.Text())
 		if err != nil {
 			panic(err)
 		}
 
-		ret[i].To = uint(to)
+		ret[i].To = to
 
 		scanner.Scan()
 		ret[i].Length, err = strconv.ParseFloat(scanner.Text(), 64)
