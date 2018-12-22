@@ -37,9 +37,14 @@ func (g *Graph) Dijkstra(sources []*data.CircleVertex, destinations []*data.Circ
 		}
 
 		for _, e := range g.AdjList[cur.To] {
-			if e.Weight+time[e.From] < time[e.To] {
+			speedIndex := int(time[cur.To]) / data.SpeedInterval
+			for speedIndex >= data.SpeedCount {
+				speedIndex -= data.SpeedCount
+			}
+
+			if e.Weights[speedIndex]+time[e.From] < time[e.To] {
 				path[e.To] = e.From
-				time[e.To] = time[e.From] + e.Weight
+				time[e.To] = time[e.From] + e.Weights[speedIndex]
 				distance[e.To] = distance[e.From] + e.Length
 				heap.Push(&pq, &data.DijkstraNode{
 					To:     e.To,
