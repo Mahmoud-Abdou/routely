@@ -5,10 +5,11 @@ import (
 	"testing"
 )
 
-func TestSum(t *testing.T) {
+func TestReadData(t *testing.T) {
 	const map1 = "6 0 0.25 0.33 1 0.73 0.47 2 1.00 0.54 3 0.34 0.60 4 0.81 0.20 5 1.07 0.28 7 0 1 0.50 20 0 3 0.28 80 3 4 0.62 80 1 4 0.28 40 1 2 0.28 40 4 5 0.27 60 2 5 0.27 60"
 	const q1 = "1 0.16 0.21 1.09 0.44 300"
-	intr, rood, queries := ReadData(strings.NewReader(map1), strings.NewReader(q1))
+	intr, rood, queries := ReadData(strings.NewReader(map1), strings.NewReader(q1), false)
+
 	if len(intr) != 6 {
 		t.Errorf("error size of intersections")
 	}
@@ -45,7 +46,7 @@ func TestSum(t *testing.T) {
 		if rood[i].Length != leng[i] {
 			t.Errorf("error wrong length")
 		}
-		if rood[i].Speed != speed[i] {
+		if rood[i].Speeds[0] != speed[i] {
 			t.Errorf("error wrong speed")
 		}
 	}
@@ -61,7 +62,7 @@ func TestSum(t *testing.T) {
 	if queries[0].To.Y != 0.44 {
 		t.Errorf("error wrong q t y")
 	}
-	if queries[0].WalkingRadius != 300 {
+	if queries[0].WalkingRadius != 300/1000.0 {
 		t.Errorf("error wrong q R")
 	}
 }
