@@ -133,6 +133,7 @@ func readQueries(scanner *bufio.Scanner) []*data.Query {
 		if err != nil {
 			panic(err)
 		}
+		ret[i].WalkingRadius /= 1000.0
 	}
 	return ret
 }
