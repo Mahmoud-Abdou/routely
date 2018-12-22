@@ -19,6 +19,8 @@ func NewGraph(vertices []*data.Intersection, edges []*data.Road) *Graph {
 	}
 
 	for _, E := range edges {
+		E.Weights = make([]float64, len(E.Speeds))
+
 		for idx := 0; idx < data.SpeedCount; idx++ {
 			if E.Speeds[idx] == 0 {
 				E.Weights[idx] = inf

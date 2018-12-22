@@ -20,7 +20,7 @@ func main() {
 
 	subPath := ""
 
-	if caseType == 2 {
+	if caseType == "2" {
 		subPath = "Bonus"
 	}
 
@@ -40,7 +40,7 @@ func main() {
 		panic(err)
 	}
 
-	intersections, roads, queries := reader.ReadData(mapfile, queryfile, (caseType == 2))
+	intersections, roads, queries := reader.ReadData(mapfile, queryfile, (caseType == "2"))
 	graph := graphs.NewGraph(intersections, roads)
 	circlefinder := algorithm.NewCircleFinder(intersections)
 
