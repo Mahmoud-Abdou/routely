@@ -1,5 +1,11 @@
 package data
 
+// SpeedCount length of speed per each rood
+var SpeedCount uint
+
+// SpeedInterval time interval that each speed lasts
+var SpeedInterval uint
+
 // Point represents a 2D point
 type Point struct {
 	X float64
@@ -14,11 +20,11 @@ type Intersection struct {
 
 // Road holds road data
 type Road struct {
-	From   int
-	To     int
-	Length float64
-	Speed  float64
-	Weight float64
+	From    int
+	To      int
+	Length  float64
+	Speeds  []float64
+	Weights []float64
 }
 
 // DijkstraNode holds dijkstra data in heap
