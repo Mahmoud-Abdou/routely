@@ -19,11 +19,16 @@ func NewGraph(vertices []*data.Intersection, edges []*data.Road) *Graph {
 	}
 
 	for _, E := range edges {
-		if E.Speed == 0 {
-			E.Weight = inf
-		} else {
-			E.Weight = E.Length / E.Speed
+		E.Weights = make([]float64, len(E.Speeds))
+
+		for idx := 0; idx < data.SpeedCount; idx++ {
+			if E.Speeds[idx] == 0 {
+				E.Weights[idx] = inf
+			} else {
+				E.Weights[idx] = E.Length / E.Speeds[idx]
+			}
 		}
+
 		G.AdjList[E.From] = append(G.AdjList[E.From], *E)
 		E.From, E.To = E.To, E.From
 		G.AdjList[E.From] = append(G.AdjList[E.From], *E)

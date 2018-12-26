@@ -11,24 +11,36 @@ import (
 )
 
 func main() {
+
+	fmt.Print("Enter testcase type (1 for normal, 2 for bonus): ")
+
+	input := bufio.NewReader(os.Stdin)
+	caseType, _ := input.ReadString('\n')
+	caseType = caseType[:len(caseType)-1]
+
+	subPath := ""
+
+	if caseType == "2" {
+		subPath = "Bonus"
+	}
+
 	fmt.Print("Enter Test Case Number: ")
 
 	//input
-	input := bufio.NewReader(os.Stdin)
 	path, _ := input.ReadString('\n')
 	path = path[:len(path)-1]
 
-	mapfile, err := os.Open("./Samples/map" + path + ".txt")
+	mapfile, err := os.Open("./Samples" + subPath + "/map" + path + ".txt")
 	if err != nil {
 		panic(err)
 	}
 
-	queryfile, err := os.Open("./Samples/queries" + path + ".txt")
+	queryfile, err := os.Open("./Samples" + subPath + "/queries" + path + ".txt")
 	if err != nil {
 		panic(err)
 	}
 
-	intersections, roads, queries := reader.ReadData(mapfile, queryfile)
+	intersections, roads, queries := reader.ReadData(mapfile, queryfile, (caseType == "2"))
 	graph := graphs.NewGraph(intersections, roads)
 	circlefinder := algorithm.NewCircleFinder(intersections)
 

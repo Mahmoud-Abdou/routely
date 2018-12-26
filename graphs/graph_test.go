@@ -13,30 +13,41 @@ func TestNewGraph(t *testing.T) {
 		inter.Y = 2
 		vert = append(vert, &inter)
 	}
+
+	speeds := make([]float64, 1)
+	speeds[0] = 2
+
+	weights := make([]float64, 1)
+	weights[0] = 0.5
+
 	var edg []*data.Road
 	e1 := data.Road{
-		From:   0,
-		To:     1,
-		Length: 1,
-		Speed:  2,
+		From:    0,
+		To:      1,
+		Length:  1,
+		Speeds:  speeds,
+		Weights: weights,
 	}
 	e2 := data.Road{
-		From:   1,
-		To:     4,
-		Length: 1,
-		Speed:  2,
+		From:    1,
+		To:      4,
+		Length:  1,
+		Speeds:  speeds,
+		Weights: weights,
 	}
 	e3 := data.Road{
-		From:   3,
-		To:     0,
-		Length: 1,
-		Speed:  2,
+		From:    3,
+		To:      0,
+		Length:  1,
+		Speeds:  speeds,
+		Weights: weights,
 	}
 	e4 := data.Road{
-		From:   2,
-		To:     1,
-		Length: 1,
-		Speed:  2,
+		From:    2,
+		To:      1,
+		Length:  1,
+		Speeds:  speeds,
+		Weights: weights,
 	}
 
 	edg = append(edg, &e1)

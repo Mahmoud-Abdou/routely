@@ -1,10 +1,10 @@
 package data
 
 // SpeedCount length of speed per each rood
-var SpeedCount uint
+var SpeedCount int
 
 // SpeedInterval time interval that each speed lasts
-var SpeedInterval uint
+var SpeedInterval int
 
 // Point represents a 2D point
 type Point struct {

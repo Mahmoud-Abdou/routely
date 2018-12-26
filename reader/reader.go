@@ -8,14 +8,14 @@ import (
 )
 
 // ReadData read test data from io stream
-func ReadData(mapFile io.Reader, queryFile io.Reader) ([]*data.Intersection, []*data.Road, []*data.Query) {
+func ReadData(mapFile io.Reader, queryFile io.Reader, isBonus bool) ([]*data.Intersection, []*data.Road, []*data.Query) {
 	scannerd := bufio.NewScanner(mapFile)
 	scannerd.Split(bufio.ScanWords)
 
 	scannerq := bufio.NewScanner(queryFile)
 	scannerq.Split(bufio.ScanWords)
 
-	return readIntersections(scannerd), readRoads(scannerd), readQueries(scannerq)
+	return readIntersections(scannerd), readRoads(scannerd, isBonus), readQueries(scannerq)
 }
 
 func readIntersections(scanner *bufio.Scanner) []*data.Intersection {
@@ -52,16 +52,30 @@ func readIntersections(scanner *bufio.Scanner) []*data.Intersection {
 	return ret
 }
 
-func readRoads(scanner *bufio.Scanner) []*data.Road {
+func readRoads(scanner *bufio.Scanner, isBonus bool) []*data.Road {
 	scanner.Scan()
 	m, err := strconv.Atoi(scanner.Text())
 	if err != nil {
 		panic(err)
 	}
 
+	if isBonus {
+		scanner.Scan()
+		speedConut, _ := strconv.Atoi(scanner.Text())
+		data.SpeedCount = speedConut
+
+		scanner.Scan()
+		speedInterval, _ := strconv.Atoi(scanner.Text())
+		data.SpeedInterval = speedInterval
+	} else {
+		data.SpeedCount = 1
+		data.SpeedInterval = 1e9
+	}
+
 	ret := make([]*data.Road, m)
 	for i := 0; i < m; i++ {
 		ret[i] = &data.Road{}
+		ret[i].Speeds = make([]float64, data.SpeedCount)
 
 		scanner.Scan()
 		from, err := strconv.Atoi(scanner.Text())
@@ -84,10 +98,12 @@ func readRoads(scanner *bufio.Scanner) []*data.Road {
 			panic(err)
 		}
 
-		scanner.Scan()
-		ret[i].Speed, err = strconv.ParseFloat(scanner.Text(), 64)
-		if err != nil {
-			panic(err)
+		for j := 0; j < data.SpeedCount; j++ {
+			scanner.Scan()
+			ret[i].Speeds[j], err = strconv.ParseFloat(scanner.Text(), 64)
+			if err != nil {
+				panic(err)
+			}
 		}
 	}
 	return ret
