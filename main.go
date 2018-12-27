@@ -28,7 +28,7 @@ func main() {
 
 	//input
 	path, _ := input.ReadString('\n')
-	path = path[:len(path)-1]
+	path = path[:len(path)-1] // O(1)
 
 	mapfile, err := os.Open("./Samples" + subPath + "/map" + path + ".txt")
 	if err != nil {
@@ -40,15 +40,15 @@ func main() {
 		panic(err)
 	}
 
-	intersections, roads, queries := reader.ReadData(mapfile, queryfile, (caseType == "2"))
-	graph := graphs.NewGraph(intersections, roads)
-	circlefinder := algorithm.NewCircleFinder(intersections)
+	intersections, roads, queries := reader.ReadData(mapfile, queryfile, (caseType == "2")) // O(V+E+Q)
+	graph := graphs.NewGraph(intersections, roads)                                          // O(V+E)
+	circlefinder := algorithm.NewCircleFinder(intersections)                                // O(1)
 
 	var totalTime time.Duration
 
-	for _, query := range queries {
+	for _, query := range queries { // O(Q*E*log(V) + Q*V*log(D))
 		start := time.Now()
-		answer := algorithm.BestPath(graph, query, circlefinder)
+		answer := algorithm.BestPath(graph, query, circlefinder) // O(E*log(V) + V*log(D))
 		elapsed := time.Now().Sub(start)
 		totalTime += elapsed
 
